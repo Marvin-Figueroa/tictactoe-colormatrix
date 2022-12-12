@@ -1,0 +1,60 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 70rem;
+  gap: 3rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-basis: 35%;
+}
+
+.menu__button {
+  padding: 1.8rem;
+  border-radius: 10px;
+  background-color: orangered;
+  color: white;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  font-family: inherit;
+
+  &:focus {
+    box-shadow: gold 0px 0px 0px 3px;
+  }
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+    background-color: tomato;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .menu {
+    flex-direction: row;
+    margin: 0 auto;
+  }
+}
