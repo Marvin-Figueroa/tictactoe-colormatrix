@@ -1,0 +1,19 @@
+.color-item {
+  max-height: 13rem;
+  aspect-ratio: 1;
+  border: none;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.current {
+  box-shadow: darkred 0px 0px 0px 3px;
+}
