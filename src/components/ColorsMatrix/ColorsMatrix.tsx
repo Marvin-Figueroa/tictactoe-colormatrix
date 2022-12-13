@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useTimeMachine from '../../hooks/useTimeMachine';
 import ColorsGrid from '../ColorsGrid/ColorsGrid';
 import './ColorsMatrix.scss';
 
 export default function ColorsTimeMachine(): React.ReactElement {
-  const [canSelectColor, setCanSelectColor] = useState(true);
-
   const {
     state,
     setState,
@@ -22,6 +20,8 @@ export default function ColorsTimeMachine(): React.ReactElement {
       setState(color);
     }
   }
+
+  const canSelectColor = state.future.length === 0;
 
   return (
     <>
@@ -39,10 +39,7 @@ export default function ColorsTimeMachine(): React.ReactElement {
           <button
             disabled={!isRedoPossible}
             className='menu__button'
-            onClick={() => {
-              redo();
-              setCanSelectColor(false);
-            }}>
+            onClick={redo}>
             Next
           </button>
           <button
@@ -51,7 +48,6 @@ export default function ColorsTimeMachine(): React.ReactElement {
               if (isRedoPossible) {
                 goLast();
               }
-              setCanSelectColor(true);
             }}
             disabled={canSelectColor}>
             Resume
@@ -59,10 +55,7 @@ export default function ColorsTimeMachine(): React.ReactElement {
           <button
             disabled={!isUndoPossible}
             className='menu__button'
-            onClick={() => {
-              undo();
-              setCanSelectColor(false);
-            }}>
+            onClick={undo}>
             Previous
           </button>
         </section>
