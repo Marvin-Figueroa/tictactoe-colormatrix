@@ -1,0 +1,7 @@
+.board {
+  border: 3px solid darkblue;
+  border-radius: 10px;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  flex-basis: 80%;
+}
