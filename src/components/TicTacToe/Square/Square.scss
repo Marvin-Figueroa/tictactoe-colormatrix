@@ -1,0 +1,12 @@
+.square {
+  background-color: lightblue;
+  border: 2px solid darkblue;
+  font-size: 5rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
