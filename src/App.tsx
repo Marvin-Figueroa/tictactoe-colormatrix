@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import './App.scss';
 import Game from './components/TicTacToe/Game/Game';
 import ColorsMatrix from './components/ColorsMatrix/ColorsMatrix';
