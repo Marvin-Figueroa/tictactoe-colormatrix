@@ -20,13 +20,14 @@ body {
 }
 
 a {
-  padding: 2rem 3rem;
+  padding: 2rem;
   text-decoration: none;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   background-color: darkmagenta;
   color: white;
   border-radius: 10px;
+  text-align: center;
 
   &:link,
   &:visited {
@@ -36,5 +37,9 @@ a {
   &:hover,
   &:active {
     background-color: darkorchid;
+  }
+
+  &:focus {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
   }
 }
