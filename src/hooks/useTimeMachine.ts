@@ -5,7 +5,9 @@ type ActionType<T> =
   | { type: 'SET_STATE'; data: T }
   | { type: 'UNDO' }
   | { type: 'REDO' }
-  | { type: 'RESET' };
+  | { type: 'GO_FIRST' }
+  | { type: 'GO_LAST' }
+  | { type: 'CLEAR_STATE'; data: T };
 
 interface StateType<T> {
   past: T[];
@@ -18,7 +20,9 @@ interface TimeMachineReturn<T> {
   setState: (newState: T) => void;
   undo: () => void;
   redo: () => void;
-  reset: () => void;
+  goFirst: () => void;
+  goLast: () => void;
+  clear: (value: T) => void;
   pastStates: T[];
   futureStates: T[];
   isUndoPossible: boolean;
@@ -50,10 +54,22 @@ const reducerTimeMachine = <T>(
         present: future[0],
         future: future.slice(1),
       };
-    case 'RESET':
+    case 'GO_FIRST':
+      return {
+        past: [],
+        present: past[0],
+        future: [...past.slice(1), present],
+      };
+    case 'GO_LAST':
       return {
         past: [...past, present, ...future.slice(0, future.length - 1)],
         present: future[future.length - 1],
+        future: [],
+      };
+    case 'CLEAR_STATE':
+      return {
+        past: [],
+        present: action.data,
         future: [],
       };
     default:
@@ -76,8 +92,11 @@ const useTimeMachine = <T>(initialState: T): TimeMachineReturn<T> => {
     dispatch({ type: 'SET_STATE', data: newState });
   const undo = (): void => dispatch({ type: 'UNDO' });
   const redo = (): void => dispatch({ type: 'REDO' });
-  const reset = (): void => dispatch({ type: 'RESET' });
-  const isUndoPossible = past.length > 1;
+  const goLast = (): void => dispatch({ type: 'GO_LAST' });
+  const goFirst = (): void => dispatch({ type: 'GO_FIRST' });
+  const clear = (value: T): void =>
+    dispatch({ type: 'CLEAR_STATE', data: value });
+  const isUndoPossible = past.length > 0;
   const isRedoPossible = future.length > 0;
 
   return {
@@ -85,7 +104,9 @@ const useTimeMachine = <T>(initialState: T): TimeMachineReturn<T> => {
     setState,
     undo,
     redo,
-    reset,
+    goFirst,
+    goLast,
+    clear,
     pastStates: past,
     futureStates: future,
     isUndoPossible,
