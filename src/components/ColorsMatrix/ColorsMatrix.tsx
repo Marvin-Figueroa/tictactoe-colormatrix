@@ -7,8 +7,15 @@ import './ColorsMatrix.scss';
 export default function ColorsTimeMachine(): React.ReactElement {
   const [canSelectColor, setCanSelectColor] = useState(true);
 
-  const { state, setState, undo, redo, reset, isUndoPossible, isRedoPossible } =
-    useTimeMachine('');
+  const {
+    state,
+    setState,
+    undo,
+    redo,
+    goLast,
+    isUndoPossible,
+    isRedoPossible,
+  } = useTimeMachine('');
 
   function handleColorClick(color: string): void {
     if (state.present !== color) {
@@ -42,7 +49,7 @@ export default function ColorsTimeMachine(): React.ReactElement {
             className='menu__button'
             onClick={() => {
               if (isRedoPossible) {
-                reset();
+                goLast();
               }
               setCanSelectColor(true);
             }}
