@@ -1,4 +1,4 @@
-# Homework Week 7
+# Tic-Tac-Toe & Matrix of Colors
 
 ## Description
 
